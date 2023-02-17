@@ -12,9 +12,14 @@ import { IFilter } from '../utils/filterData'
 interface SelectedProps {
   item: IFilter
   setProperty: any
+  handleButton: any
 }
 
-export const Selected: FC<SelectedProps> = ({ item, setProperty }) => {
+export const Selected: FC<SelectedProps> = ({
+  item,
+  setProperty,
+  handleButton,
+}) => {
   const [current, setCurrent] = useState('')
 
   const handleChange = async (e: SelectChangeEvent, keyName: any) => {
@@ -23,6 +28,7 @@ export const Selected: FC<SelectedProps> = ({ item, setProperty }) => {
       ...prev,
       ...keyName,
     }))
+    handleButton()
   }
   return (
     <>

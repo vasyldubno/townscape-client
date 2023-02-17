@@ -37,15 +37,22 @@ export const Search = () => {
     router.push({ query: { ...property } })
   }
 
-  useEffect(() => {
-    handleButton()
-  }, [property])
+  // useEffect(() => {
+  //   handleButton()
+  // }, [Object.values(property).some((property: string) => property.length > 2)])
 
   return (
     <div className={s.wrapper}>
       <Box className={s.grid}>
         {filterData.map((item, index) => {
-          return <Selected key={index} item={item} setProperty={setProperty} />
+          return (
+            <Selected
+              key={index}
+              item={item}
+              setProperty={setProperty}
+              handleButton={handleButton}
+            />
+          )
         })}
       </Box>
     </div>
