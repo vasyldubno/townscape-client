@@ -1,3 +1,4 @@
+import { StyledEngineProvider } from '@mui/material'
 import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import NProgress from 'nprogress'
@@ -18,9 +19,11 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <StyledEngineProvider injectFirst>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </StyledEngineProvider>
     </>
   )
 }
