@@ -24,8 +24,8 @@ interface HomeProps {
   query: IProperty
 }
 
-export default function Home({ properties, query }: HomeProps) {
-  const [propertyList, setPropertyList] = useState(properties)
+export default function Home({ query }: HomeProps) {
+  const [propertyList, setPropertyList] = useState<Property[] | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -36,7 +36,15 @@ export default function Home({ properties, query }: HomeProps) {
     setPropertyList(getData({ query: router.query }))
   }, [router.query])
 
-  return <HomePage properties={propertyList} />
+  return (
+    <>
+      {propertyList ? (
+        <HomePage properties={propertyList} />
+      ) : (
+        <p>LOADING...</p>
+      )}
+    </>
+  )
 }
 
 export const getServerSideProps: GetServerSideProps = async (
@@ -53,19 +61,19 @@ export const getServerSideProps: GetServerSideProps = async (
   const purpose = context.query.purpose || 'for-rent'
   const sort = context.query.sort || 'date-asc'
 
-  const properties = getData({
-    query: {
-      areaMax,
-      bathsMin,
-      maxPrice,
-      minPrice,
-      categoryExternalID,
-      furnishingStatus,
-      rentFrequency,
-      roomsMin,
-      purpose,
-    },
-  })
+  // const properties = getData({
+  //   query: {
+  //     areaMax,
+  //     bathsMin,
+  //     maxPrice,
+  //     minPrice,
+  //     categoryExternalID,
+  //     furnishingStatus,
+  //     rentFrequency,
+  //     roomsMin,
+  //     purpose,
+  //   },
+  // })
 
   const defaultQuery = {
     areaMax,
@@ -82,7 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
-      properties: shuffle(properties) as Property[],
+      // properties: shuffle(properties) as Property[],
       query: defaultQuery,
     },
   }

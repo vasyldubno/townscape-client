@@ -16,10 +16,14 @@ export const HomePage: FC<HomePageProps> = ({ properties }) => {
         <title>TownScape</title>
       </Head>
       <Search />
-      <div className={s.wrapperProperties}>
-        {properties &&
-          properties.map((item) => <Banner key={item.id} item={item} />)}
-      </div>
+      {properties ? (
+        <div className={s.wrapperProperties}>
+          {properties &&
+            properties.map((item) => <Banner key={item.id} item={item} />)}
+        </div>
+      ) : (
+        <p>LOADING...</p>
+      )}
     </>
   )
 }

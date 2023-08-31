@@ -44,11 +44,7 @@ export const Banner: FC<BannerPropd> = ({ item }) => {
                   src={item.coverPhoto.url}
                   alt="photo"
                   fill
-                  // sizes="(min-width: 320px) 100vw"
-                  // loading="lazy"
-                  // priority
-                  // layout="intrinsic"
-                  // sizes="(max-width:3000px) 10vw"
+                  className="object-cover"
                 />
               </Box>
               <Box>
