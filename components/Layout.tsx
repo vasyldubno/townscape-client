@@ -11,9 +11,15 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <CssBaseline />
-      <Header />
-      {children}
-      <Footer />
+      <div className="flex flex-col h-screen">
+        <div className="flex-shrink-0">
+          <Header />
+        </div>
+        <div className="flex-grow">{children}</div>
+        <div className="flex-shrink-0">
+          <Footer />
+        </div>
+      </div>
     </>
   )
 }

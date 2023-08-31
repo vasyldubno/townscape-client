@@ -34,12 +34,14 @@ export const Search = () => {
   })
 
   const handleButton = () => {
-    router.push({ query: { ...property } })
+    router.push({ query: { ...property } }, undefined, { shallow: true })
   }
 
-  // useEffect(() => {
-  //   handleButton()
-  // }, [Object.values(property).some((property: string) => property.length > 2)])
+  useEffect(() => {
+    if (Object.values(property).some((value: string) => value.length >= 1)) {
+      handleButton()
+    }
+  }, [property])
 
   return (
     <div className={s.wrapper}>

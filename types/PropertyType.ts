@@ -149,68 +149,68 @@ export interface HighlightResult {
 
 export interface Property {
   id: number
-  ownerID: number
-  userExternalID: string
-  sourceID: number
-  state: string
-  _geoloc: Geoloc
-  geography: Geography
-  purpose: string
+  // ownerID: number
+  // userExternalID: string
+  // sourceID: number
+  // state: string
+  // _geoloc: Geoloc
+  // geography: Geography
+  // purpose: string
   price: number
-  product: string
-  productLabel: string
-  productScore: number
-  rentFrequency: string
-  referenceNumber: string
-  permitNumber: string
-  projectNumber?: any
-  title: string
-  title_l1: string
-  title_l2: string
+  // product: string
+  // productLabel: string
+  // productScore: number
+  // rentFrequency: string
+  // referenceNumber: string
+  // permitNumber: string
+  // projectNumber?: any
+  // title: string
+  // title_l1: string
+  // title_l2: string
   externalID: string
-  slug: string
-  slug_l1: string
-  slug_l2: string
-  location: Location[]
-  category: Category[]
-  createdAt: number
-  updatedAt: number
-  reactivatedAt: number
+  // slug: string
+  // slug_l1: string
+  // slug_l2: string
+  // location: Location[]
+  // category: Category[]
+  // createdAt: number
+  // updatedAt: number
+  // reactivatedAt: number
   rooms: number
   baths: number
   area: number
-  score: number
-  score_l1: number
-  score_l2: number
+  // score: number
+  // score_l1: number
+  // score_l2: number
   coverPhoto: CoverPhoto
-  photoCount: number
-  videoCount: number
-  panoramaCount: number
-  phoneNumber: PhoneNumber
-  contactName: string
-  agency: Agency
-  hash: string
-  keywords: string[]
+  // photoCount: number
+  // videoCount: number
+  // panoramaCount: number
+  // phoneNumber: PhoneNumber
+  // contactName: string
+  // agency: Agency
+  // hash: string
+  // keywords: string[]
   isVerified: boolean
-  verification: Verification
-  verifiedScore: number
-  completionStatus: string
-  randBoostScore: number
-  randBoostScore_l1: number
-  randBoostScore_l2: number
-  floorPlanID?: any
-  furnishingStatus: string
-  extraFields: ExtraFields
-  type: string
-  ownerAgent: OwnerAgent
-  cityLevelScore: number
-  indyScore: number
-  indyScore_l1: number
-  indyScore_l2: number
-  hasMatchingFloorPlans: boolean
-  photoIDs: number[]
-  hidePrice: boolean
-  locationPurposeTier: number
-  objectID: string
-  _highlightResult: HighlightResult
+  // verification: Verification
+  // verifiedScore: number
+  // completionStatus: string
+  // randBoostScore: number
+  // randBoostScore_l1: number
+  // randBoostScore_l2: number
+  // floorPlanID?: any
+  // furnishingStatus: string
+  // extraFields: ExtraFields
+  // type: string
+  // ownerAgent: OwnerAgent
+  // cityLevelScore: number
+  // indyScore: number
+  // indyScore_l1: number
+  // indyScore_l2: number
+  // hasMatchingFloorPlans: boolean
+  // photoIDs: number[]
+  // hidePrice: boolean
+  // locationPurposeTier: number
+  // objectID: string
+  // _highlightResult: HighlightResult
 }

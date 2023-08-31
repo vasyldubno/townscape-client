@@ -10,7 +10,6 @@ interface HomePageProps {
 }
 
 export const HomePage: FC<HomePageProps> = ({ properties }) => {
-  console.log('properties', properties)
   return (
     <>
       <Head>
@@ -19,7 +18,7 @@ export const HomePage: FC<HomePageProps> = ({ properties }) => {
       <Search />
       <div className={s.wrapperProperties}>
         {properties &&
-          properties.map((item: any) => <Banner key={item.id} item={item} />)}
+          properties.map((item) => <Banner key={item.id} item={item} />)}
       </div>
     </>
   )

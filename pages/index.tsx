@@ -1,46 +1,89 @@
-import lodash from 'lodash'
+import { shuffle } from 'lodash'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { HomePage } from '../components/Pages/HomePage'
 import { Property } from '../types/PropertyType'
-import { fetchApi } from '../utils/fetchApi'
+import { getData } from '../utils/getData'
+
+interface IProperty {
+  areaMax: string
+  bathsMin: string
+  categoryExternalID: string
+  furnishingStatus: string
+  maxPrice: string
+  minPrice: string
+  purpose: string
+  rentFrequency: string
+  roomsMin: string
+  sort: string
+}
 
 interface HomeProps {
   properties: Property[]
+  query: IProperty
 }
 
-export default function Home({ properties }: HomeProps) {
-  return <HomePage properties={properties} />
+export default function Home({ properties, query }: HomeProps) {
+  const [propertyList, setPropertyList] = useState(properties)
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push({ query: { ...query } }, undefined, { shallow: true })
+  }, [])
+
+  useEffect(() => {
+    setPropertyList(getData({ query: router.query }))
+  }, [router.query])
+
+  return <HomePage properties={propertyList} />
 }
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const purpose = context.query.purpose || 'for-sale'
-  const areaMax = context.query.areaMax || '1000'
-  const bathsMin = context.query.bathsMin || '2'
+  const areaMax = Number(context.query.areaMax) || 20000
+  const bathsMin = Number(context.query.bathsMin) || 1
   const categoryExternalID = context.query.categoryExternalID || '16'
   const furnishingStatus = context.query.furnishingStatus || 'furnished'
-  const maxPrice = context.query.maxPrice || '100000'
-  const minPrice = context.query.minPrice || '10000'
+  const maxPrice = Number(context.query.maxPrice) || 5000000
+  const minPrice = Number(context.query.minPrice) || 10000
   const rentFrequency = context.query.rentFrequency || 'monthly'
-  const roomsMin = context.query.roomsMin || '2'
-  const sort = context.query.sort || 'price-des'
+  const roomsMin = Number(context.query.roomsMin) || 1
+  const purpose = context.query.purpose || 'for-rent'
+  const sort = context.query.sort || 'date-asc'
 
-  const propertyForSale = await fetchApi(
-    `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002&hitsPerPage=20&areaMax=${areaMax}&bathsMin=${bathsMin}&categoryExternalID=${categoryExternalID}&furnishingStatus=${furnishingStatus}&maxPrice=${maxPrice}&minPrice=${minPrice}&purpose=for-sale&rentFrequency=${rentFrequency}&roomsMin=${roomsMin}&sort=${sort}`
-  )
+  const properties = getData({
+    query: {
+      areaMax,
+      bathsMin,
+      maxPrice,
+      minPrice,
+      categoryExternalID,
+      furnishingStatus,
+      rentFrequency,
+      roomsMin,
+      purpose,
+    },
+  })
 
-  const propertyForRent = await fetchApi(
-    `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002&hitsPerPage=20&areaMax=${areaMax}&bathsMin=${bathsMin}&categoryExternalID=${categoryExternalID}&furnishingStatus=${furnishingStatus}&maxPrice=${maxPrice}&minPrice=${minPrice}&purpose=for-rent&rentFrequency=${rentFrequency}&roomsMin=${roomsMin}&sort=${sort}`
-  )
+  const defaultQuery = {
+    areaMax,
+    bathsMin,
+    categoryExternalID,
+    furnishingStatus,
+    maxPrice,
+    minPrice,
+    purpose,
+    rentFrequency,
+    roomsMin,
+    sort,
+  }
 
   return {
     props: {
-      properties: lodash.shuffle([
-        ...propertyForSale?.hits,
-        ...propertyForRent?.hits,
-      ]) as Property[],
-      query: context.query,
+      properties: shuffle(properties) as Property[],
+      query: defaultQuery,
     },
   }
 }

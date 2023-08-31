@@ -6,8 +6,9 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material'
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { IFilter } from '../utils/filterData'
+import { useRouter } from 'next/router'
 
 interface SelectedProps {
   item: IFilter
@@ -20,6 +21,16 @@ export const Selected: FC<SelectedProps> = ({
   setProperty,
   handleButton,
 }) => {
+  const router = useRouter()
+
+  useEffect(() => {
+    const queryValue = router.query[item.queryName] ?? ''
+
+    if (typeof queryValue === 'string') {
+      setCurrent(queryValue)
+    }
+  }, [])
+
   const [current, setCurrent] = useState('')
 
   const handleChange = async (e: SelectChangeEvent, keyName: any) => {
@@ -30,6 +41,7 @@ export const Selected: FC<SelectedProps> = ({
     }))
     handleButton()
   }
+
   return (
     <>
       <Box sx={{ width: '200px', m: '10px' }}>

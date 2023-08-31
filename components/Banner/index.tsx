@@ -13,9 +13,10 @@ import BathroomIcon from '@mui/icons-material/Bathroom'
 import { RxDividerVertical } from 'react-icons/rx'
 
 import { motion, useInView } from 'framer-motion'
+import { Property } from '../../types/PropertyType'
 
 interface BannerPropd {
-  item: any
+  item: Property
 }
 
 export const Banner: FC<BannerPropd> = ({ item }) => {
