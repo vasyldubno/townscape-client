@@ -1,14 +1,6 @@
-import { SALE } from '../assets/sale'
+import SALE from '../assets/sale.json'
 
 type Props = {
-  // areaMax: number
-  // bathsMin: number
-  // categoryExternalID: string
-  // furnishingStatus: string
-  // maxPrice: number
-  // minPrice: number
-  // rentFrequency: string
-  // roomsMin: number
   query: any
 }
 
@@ -22,13 +14,6 @@ export const getData = (props: Props) => {
   const rentFrequency = props.query.rentFrequency || 'monthly'
   const roomsMin = Number(props.query.roomsMin) || 1
   const purpose = props.query.purpose
-
-  // console.log(props.query)
-  // console.log(
-  //   SALE.filter((item) =>
-  //     item.category.some((item) => item.externalID === '21')
-  //   )
-  // )
 
   const propertiesForSale = SALE.filter(
     (item) =>

@@ -61,20 +61,6 @@ export const getServerSideProps: GetServerSideProps = async (
   const purpose = context.query.purpose || 'for-rent'
   const sort = context.query.sort || 'date-asc'
 
-  // const properties = getData({
-  //   query: {
-  //     areaMax,
-  //     bathsMin,
-  //     maxPrice,
-  //     minPrice,
-  //     categoryExternalID,
-  //     furnishingStatus,
-  //     rentFrequency,
-  //     roomsMin,
-  //     purpose,
-  //   },
-  // })
-
   const defaultQuery = {
     areaMax,
     bathsMin,
@@ -90,7 +76,6 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
-      // properties: shuffle(properties) as Property[],
       query: defaultQuery,
     },
   }
