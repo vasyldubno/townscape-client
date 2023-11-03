@@ -39,5 +39,4 @@ App that helps you rent apartments.
 ## Technologies
 Front-end - [Next.JS](https://nextjs.org/)  
 
-## Deploy
-[Demo](https://townscape.vercel.app)
+
